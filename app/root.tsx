@@ -25,8 +25,6 @@ export const meta: MetaFunction = () => ({
 export default function App() {
   const { theme } = useLoaderData();
 
-  console.log(theme)
-
   return (
     <html lang="en">
       <head>
