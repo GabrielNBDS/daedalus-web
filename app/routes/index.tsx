@@ -44,7 +44,7 @@ export default function Home() {
             and build fast because of the ui kit.
 					</Text>
 
-          <Link to="/login"><Button>Login</Button></Link>
+          <Button component={Link} to="'/login">Login</Button>
 				</Group>
 			</Container>
 		</Box>
