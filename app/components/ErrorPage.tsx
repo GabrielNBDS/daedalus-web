@@ -1,8 +1,17 @@
+import type { ReactNode } from 'react';
 import React from 'react'
 import { Title, Text, Button, Container, Group, Box, useMantineTheme } from '@mantine/core'
 import { Link } from '@remix-run/react'
 
-export default function NotFound() {
+interface Props {
+	code: string | number;
+	title: string;
+	subtitle?: string;
+	showGoToHome?: boolean;
+	children?: ReactNode;
+}
+
+export default function ErrorPage({ code, title, subtitle = '', showGoToHome = false, children }: Props) {
 	const theme = useMantineTheme()
 
 	return (
@@ -19,7 +28,7 @@ export default function NotFound() {
 					fontSize: 120,
 				},
 			}}>
-        404
+        {code}
 			</Box>
 
 			<Title sx={{
@@ -31,7 +40,7 @@ export default function NotFound() {
 					fontSize: 32,
 				},
 			}}>
-        You have found a secret place.
+        {title}
 			</Title>
 
 			<Text
@@ -45,16 +54,18 @@ export default function NotFound() {
 					marginBottom: theme.spacing.xl * 1.5,
 				}}
 			>
-        Unfortunately, this is only a 404 page. You may have mistyped the address, or the page has
-        been moved to another URL.
+				{subtitle}
 			</Text>
-			<Group position="center">
-        <Link to="/">
-          <Button variant="subtle" size="md">
-            Take me back to home page
-          </Button>
-        </Link>
-			</Group>
+
+			{showGoToHome && (
+				<Group position="center">
+					<Button component={Link} variant="subtle" size="md" to="/">
+						Take me back to home page
+					</Button>
+				</Group>
+			)}
+
+			{children}
 		</Container>
 	)
 }
